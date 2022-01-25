@@ -1,17 +1,68 @@
 import React from "react";
-import axios from "axios";
-import { Audio } from "react-loader-spinner";
+import "./Weather.css";
 
-export default function Weather(props) {
-  function handleResponse(response) {
-    alert(
-      "The Weather in ${response.data.name} is ${response.data.main.temp}°C"
-    );
-  }
+export default function Weather() {
+  let weatherData = {
+    city: "London",
+    temperature: 15,
+    date: "Tuesday 11:15",
+    description: "Partly Cloudy",
+    imgUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
+    humidity: 75,
+    wind: 8,
+  };
 
-  let apiKey = "068cbf4b37e3ff950b253f0b64177940";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q={props.city}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(handleResponse);
-
-  return <Audio heigth="100" width="100" color="white" ariaLabel="loading" />;
+  return (
+    <div className="Weather">
+      <form className="mb-3">
+        <div className="row">
+          <div className="col-9">
+            <input
+              type="search"
+              placeholder="Type a city.."
+              className="form-control"
+              autoComplete="off"
+            />
+          </div>
+          <div className="col-3">
+            <input
+              type="submit"
+              value="Search"
+              className="btn btn-primary w-100"
+            />
+          </div>
+        </div>
+      </form>
+      <div className="overview">
+        <h1>{weatherData.city}</h1>
+        <ul>
+          <li>Last updated: {weatherData.date}</li>
+          <li>{weatherData.description}</li>
+        </ul>
+      </div>
+      <div className="row">
+        <div className="col-6">
+          <div className="clearfix weather-temperature">
+            <img
+              src={weatherData.imgUrl}
+              alt={weatherData.description}
+              className="float-left"
+            />
+            <div className="float-left">
+              <strong>{weatherData.temperature}</strong>
+              <span className="units">
+                <a href="/">°C</a> | <a href="/">°F</a>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className="col-6">
+          <ul>
+            <li>Humidity: {weatherData.humidity}%</li>
+            <li>Wind: {weatherData.wind} km/h</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
 }
