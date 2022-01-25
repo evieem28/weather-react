@@ -4,12 +4,12 @@ import "./Weather.css";
 export default function Weather() {
   let weatherData = {
     city: "London",
-    temperature: 15,
+    temperature: "15",
     date: "Tuesday 11:15",
     description: "Partly Cloudy",
     imgUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
-    humidity: 75,
-    wind: 8,
+    humidity: "75",
+    wind: "8",
   };
 
   return (
